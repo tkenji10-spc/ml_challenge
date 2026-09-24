@@ -145,6 +145,8 @@ Abra o navegador e acesse:
  
 ```text
 http://localhost:5001
+ou
+http://127.0.0.1:5001/
 ```
  
 ---
