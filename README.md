@@ -23,10 +23,11 @@ Aplicação desenvolvida em Python para captura e análise de tráfego de rede e
 
 ## Estrutura do Projeto
 
-
+```text
 net-analyzer/
 │
 ├── app/
+│   ├── __init__.py
 │   ├── capture.py
 │   ├── database.py
 │   ├── models.py
@@ -41,6 +42,10 @@ net-analyzer/
 ├── db/
 │   └── packets.db
 │
+├── Dockerfile
+├── docker-compose.yml
 ├── requirements.txt
+├── .gitignore
 └── README.md
+```
 
