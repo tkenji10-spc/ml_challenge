@@ -1,0 +1,25 @@
+# Ambiente virtual Python
+venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Banco de dados SQLite
+db/*.db
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/

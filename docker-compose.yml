@@ -1,0 +1,16 @@
+
+
+services:
+
+  traffic-analyzer:
+
+    build: .
+
+    network_mode: host
+
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+
+    volumes:
+      - ./db:/app/db

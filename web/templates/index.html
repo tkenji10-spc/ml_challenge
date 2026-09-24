@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Network Traffic Analyzer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        button {
+            padding: 12px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Network Traffic Analyzer</h1>
+
+<button onclick="startCapture()">
+    Iniciar Captura
+</button>
+
+<button onclick="stopCapture()">
+    Parar Captura
+</button>
+
+<div class="card">
+    <h2>Total de Pacotes</h2>
+    <h1 id="total">0</h1>
+</div>
+
+<div class="card">
+    <h2>Protocolos</h2>
+    <pre id="protocols"></pre>
+</div>
+
+<div class="card">
+    <h2>Top 5 IPs Origem</h2>
+    <pre id="sources"></pre>
+</div>
+
+<div class="card">
+    <h2>Top 5 IPs Destino</h2>
+    <pre id="destinations"></pre>
+</div>
+
+<script>
+
+async function startCapture() {
+    await fetch('/start');
+}
+
+async function stopCapture() {
+    await fetch('/stop');
+}
+
+async function loadStats() {
+
+    const response = await fetch('/api/stats');
+    const data = await response.json();
+
+    document.getElementById('total').innerText =
+        data.total_packets;
+
+    let protocols = '';
+
+    for (let key in data.protocols) {
+        protocols += `${key}: ${data.protocols[key]}\n`;
+    }
+
+    document.getElementById('protocols')
+        .innerText = protocols;
+
+    let sources = '';
+
+    data.top_sources.forEach(item => {
+        sources += `${item[0]} : ${item[1]}\n`;
+    });
+
+    document.getElementById('sources')
+        .innerText = sources;
+
+    let destinations = '';
+
+    data.top_destinations.forEach(item => {
+        destinations += `${item[0]} : ${item[1]}\n`;
+    });
+
+    document.getElementById('destinations')
+        .innerText = destinations;
+}
+
+setInterval(loadStats, 2000);
+
+loadStats();
+
+</script>
+
+</body>
+</html>
